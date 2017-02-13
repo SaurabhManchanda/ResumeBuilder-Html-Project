@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<style>
+body {font-family: "Lato", sans-serif;}
+#Wholepage
+{
+    background-color: #f3f3f3;
+}
+ul.tab {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #cf8a05;
+}
+
+/* Float the list items side by side */
+ul.tab li {float: left;}
+
+/* Style the links inside the list items */
+ul.tab li a {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+    }
+
+input[type=text]{
+    width: 100%;
+    padding: 10px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+button {
+   background-color: #cf8a05;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+#Logout
+    {
+      background-color: #050000;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 5%;
+    float: right;
+    }
+</style>
+<body>
+<div id="Wholepage">
+<Center><b><h1>RESUME/CV GENRATOR</h1></b></Center>
+    <button onclick="Logout()" id="Logout" style="visibility:visible;">Logout</button>
+    <p style="float:right" id="WelcomeUser"></p><br><br><br><br>
+<ul class="tab">
+  <li><a href="javascript:void(0)" class="tablinks" id="Home">Personal Details</a></li>
+  <li><a href="javascript:void(0)" class="tablinks" id="EduTab">Education</a></li>
+  <li><a href="javascript:void(0)" class="tablinks" id="ViewTab">View Resume</a></li>
+  <li><a href="Saurabh's _Resume.html" class="tablinks" id="About" >About Developer</a></li>
+</ul>
+
+<div id="PersonalDetails" class="tabcontent">
+  <label><b>Full Name :</b></label>
+    <input type="text" value="Enter Full Name"id="Fname" onblur="NameValidate()" required>
+    <font color="red"><p id="NameValidate"></p></font>
+    <label><b>Post :</b></label>
+    <input type="text" value="Enter Post" id="Post" onblur="PostValidate()" required>
+    <font color="red"><p id="PostValidate"></p></font>
+    <label><b>Email :</b></label>
+    <input type="text" value="Enter Email" id="Email" onblur="EmailValidate()" required>
+    <font color="red"><p id="EmailValidate"></p></font>
+    <label><b>Mobile Number :</b></label>
+    <input type="text" value="Enter Mobile Number" id="Mnumber" onblur="MobilelValidate()" required>
+    <font color="red"><p id="MobilelValidate"></p></font>
+    <label><b>Address :</b></label>
+    <input type="text" value="Enter Address" id="Address" onblur="AddressValidate()" required>
+    <font color="red"><p id="AddressValidate"></p></font>
+    <label><b>Image :</b></label>
+<input type='file' onchange="readURL(this);" />
+    <font color="red"><p id="ImageValidate"></p></font>
+    <button onclick="PersonalDetails()" id="PD" class="tablinks">Next</button>
+</div>
+
+<div id="Education" class="tabcontent">
+<label><b>EDUCATION</b></label><br>
+<table width="100%"> 
+<tr>
+<label><b>B.E(CSE) :</b></label>
+<td><input type="text" value="School/College Name" id="SCName" /></td>
+<td><input type="text" value="University Name" id="UName"/></td>
+<td><input type="text" value="Year" id="Year"/></td>
+</tr>
+</table>
+<table width="100%"> 
+<tr>
+<label><b>XII Class:</b></label>
+<td><input type="text" value="School Name" id="SName" /></td>
+<td><input type="text" value="Board Name" id="BName"/></td>
+<td><input type="text" value="Year" id="Year2"/></td>
+</tr>
+</table>
+<table width="100%"> 
+<tr>
+<label><b>X Class :</b></label>
+<td><input type="text" value="School Name" id="SName2" /></td>
+<td><input type="text" value="Board Name" id="BName2"/></td>
+<td><input type="text" value="Year" id="Year3"/></td>
+</tr>
+</table>
+<label><b>Academic Project :</b></label>
+    <input type="text" value="Academic Project" id="AProject" required>
+        <button onclick="Save()" id="GenerateCV">Save</button>
+</div>
+
+<div id="ViewResume" class="tabcontent">
+<Center><button onclick="ViewResume()" id="VR" style="width:100px;height:70px;">Generate Resume</button></Center>
+</div>
+</div>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+ $( window ).load(function() {
+        if((sessionStorage.getItem("FullName") == null)){
+        alert("Sorry,You can't open this page without login");
+        location.assign("Login.html");
+        }else {
+        clickHome();
+        document.getElementById("WelcomeUser").innerHTML = "Welcome "+ sessionStorage.getItem("FullName");
+        var SessionId = JSON.parse(localStorage.Session);
+        var AllUsersData=[];
+        AllUsersData = JSON.parse(localStorage.User);
+        var CurrentUser=[];
+        CurrentUser = AllUsersData[SessionId];
+        $('#Fname').val(CurrentUser.FullName);
+        $('#Email').val(CurrentUser.Email);
+        var Name=sessionStorage.getItem("FullName");
+        if(localStorage.getItem(Name)){
+        if(localStorage.getItem(SessionId))
+            {
+                var PrevImage="Previous Image is Loaded No Need to Upload Again";
+                document.getElementById("ImageValidate").innerHTML=PrevImage;
+                $("#ImageValidate").delay(1500).hide(0);
+            }
+        var Data=[];
+        var PrevData = localStorage.getItem(Name);
+        Data= JSON.parse(PrevData);
+            $('#Fname').val(Data.FullName);
+            $('#Post').val(Data.Post);
+            $('#Email').val(Data.Email);
+            $('#Mnumber').val(Data.Mobile);
+            $('#Address').val(Data.Address);
+            $('#SCName').val(Data.CollegeName);
+            $('#UName').val(Data.University);
+            $('#Year').val(Data.Year1);
+            $('#SName').val(Data.SchoolName);
+            $('#BName').val(Data.Board);
+            $('#Year2').val(Data.Year2);
+            $('#SName2').val(Data.SchoolName2);
+            $('#BName2').val(Data.Board2);
+            $('#Year3').val(Data.Year3);
+            $('#AProject').val(Data.AcademicProject);
+            //$('#Image').val(Data[0].Image);
+        }
+    }
+    });
+ $( document ).ready(function() {
+    });
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+function clickHome()
+    {
+        openCity(event, 'PersonalDetails');
+        document.getElementById("Home").style.backgroundColor="red";
+        document.getElementById("EduTab").style.backgroundColor="";
+    }
+function PersonalDetails()
+    {
+        openCity(event, 'Education');
+        document.getElementById("Home").style.backgroundColor="";
+        document.getElementById("EduTab").style.backgroundColor="red";
+    }
+function Save()
+    {
+        var SessionId = JSON.parse(localStorage.Session);
+        var AllUsersData=[];
+        AllUsersData = JSON.parse(localStorage.User);
+        var CurrentUser=[];
+        CurrentUser = AllUsersData[SessionId];
+        document.getElementById("EduTab").style.backgroundColor="";
+        openCity(event, 'ViewResume');
+        document.getElementById("ViewTab").style.backgroundColor="red";
+            var FullName=$('#Fname').val();
+            CurrentUser.FullName=FullName;
+            CurrentUser.Post=$('#Post').val();
+            CurrentUser.Email=$('#Email').val();
+            CurrentUser.Mobile=$('#Mnumber').val();
+            CurrentUser.Address=$('#Address').val();
+            CurrentUser.CollegeName=$('#SCName').val();
+            CurrentUser.University=$('#UName').val();
+            CurrentUser.Year1=$('#Year').val();
+            CurrentUser.SchoolName=$('#SName').val();
+            CurrentUser.Board=$('#BName').val();
+            CurrentUser.Year2=$('#Year2').val();
+            CurrentUser.SchoolName2=$('#SName2').val();
+            CurrentUser.Board2=$('#BName2').val();
+            CurrentUser.Year3=$('#Year3').val();
+            CurrentUser.AcademicProject=$('#AProject').val();
+            AllUsersData[SessionId]=(CurrentUser);
+            localStorage.setItem(FullName, JSON.stringify(CurrentUser));
+    }
+function ViewResume()
+    {
+        window.location="UserResume.html"
+    }
+function Logout()
+    {
+        window.location="Login.html";
+    }
+function NameValidate()
+{
+    var R=1;
+    var FullName=document.getElementById("Fname").value;
+    if(FullName.length<1)
+        {
+            var FullNameErrorMessage="Full Name Field is Empty";
+            document.getElementById("NameValidate").innerHTML=FullNameErrorMessage;
+            R=0;
+        }
+    else
+        {
+            document.getElementById("NameValidate").innerHTML="";
+            R=1;
+        }
+    return R;
+}
+function PostValidate()
+{
+    var R=1;
+    var Post=document.getElementById("Post").value;
+    if(Post.length<1)
+        {
+            var PostErrorMessage="Post Field is Empty";
+            document.getElementById("PostValidate").innerHTML=PostErrorMessage;
+            R=0;
+        }
+    else
+        {
+            document.getElementById("PostValidate").innerHTML="";
+            R=1;
+        }
+    return R;
+    
+}
+function MobilelValidate()
+{
+    var R=1;
+    var MobileNumber=document.getElementById("Mnumber").value;
+    if(MobileNumber.length<1)
+        {
+            var MobileNoErrorMessage1="Mobile Number Field is Empty";
+            document.getElementById("MobilelValidate").innerHTML=MobileNoErrorMessage1;
+            R=0;
+        }
+    else if(MobileNumber.length!=10)
+        {
+            var MobileNoErrorMessage2="Mobile Number should contain 10 digits only and your entered " + MobileNumber.length + " digits";
+            document.getElementById("MobilelValidate").innerHTML=MobileNoErrorMessage2;
+            R=0;
+        }
+    else
+        {
+            document.getElementById("MobilelValidate").innerHTML="";
+            R=1;
+        }
+    return R;    
+}
+function AddressValidate()
+{
+    var R=1;
+    var Address=document.getElementById("Address").value;
+    if(Post.length<1)
+        {
+            var AddressErrorMessage="Address Field is Empty";
+            document.getElementById("AddressValidate").innerHTML=AddressErrorMessage;
+            R=0;
+        }
+    else
+        {
+            document.getElementById("AddressValidate").innerHTML="";
+            R=1;
+        }
+    return R;  
+}
+function readURL(input) {
+var SessionId = JSON.parse(localStorage.Session);
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+    var Url=e.target.result;
+    localStorage.setItem(SessionId,Url);
+    var ImageMessage="Image Uploaded!";
+    document.getElementById("ImageValidate").innerHTML=ImageMessage;
+    $("#ImageValidate").delay(1000).hide(0); 
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+function EmailValidate()
+{
+    var R=1;
+    var Email = document.getElementById("Email").value;
+    var atpos = Email.indexOf("@");
+    var dotpos = Email.lastIndexOf(".");
+     if(Email.length<1)
+        {
+           var EmailEmptyErrorMessage="Email Field is Empty";
+           document.getElementById("EmailValidate").innerHTML=EmailEmptyErrorMessage;
+           R=0; 
+        }
+      else  if (atpos<1 || dotpos<atpos+2 || dotpos+2>=Email.length) {
+            var EmailErrorMessage="Not a valid e-mail address";
+            document.getElementById("EmailValidate").innerHTML=EmailErrorMessage;
+            R=0;
+              }
+        else
+        {
+            document.getElementById("EmailValidate").innerHTML="";
+            R=1;
+        }
+    return R;
+}
+</script>
+     
+</body>
+</html> 

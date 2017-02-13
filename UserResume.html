@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Resume</title>
+<link rel="stylesheet" href="Graphics.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+    $( document ).ready(function() {
+    });
+
+    $( window ).load(function() {
+        var ResumeData=[];
+        var Name=sessionStorage.getItem("FullName");
+        var SessionId = JSON.parse(localStorage.Session);
+        var Image =localStorage.getItem(SessionId);
+        var PrevData = localStorage.getItem(Name);
+        ResumeData= JSON.parse(PrevData);
+        $('#UserName').text(ResumeData.FullName);
+        $('#Post').text(ResumeData.Post);
+        $('#Email').text('Email: '+ResumeData.Email);
+        $("#Mobile").text('Mobile: '+ResumeData.Mobile);
+        $('#Address').text('Address: '+ResumeData.Address);
+        $('#SCName').text(ResumeData.CollegeName);
+        $('#UName').text(ResumeData.University);
+        $('#Year').text(ResumeData.Year1);
+        $('#SName').text(ResumeData.SchoolName);
+        $('#BName').text(ResumeData.Board);
+        $('#Year2').text(ResumeData.Year2);
+        $('#SName2').text(ResumeData.SchoolName2);
+        $('#BName2').text(ResumeData.Board2);
+        $('#Year3').text(ResumeData.Year3);
+        $('#AProject').text(ResumeData.AcademicProject);
+        $('#UserImage').attr('src', Image);
+    });
+        function Edit()
+        {
+            window.location.href="UserForm.html";
+        }
+        function Print()
+        {
+            document.getElementById("Edit").style.visibility="hidden";
+            document.getElementById("Print").style.visibility="hidden";
+            window.print();
+            document.getElementById("Edit").style.visibility="visible";
+            document.getElementById("Print").style.visibility="visible";
+        }
+    </script>
+</head>
+<body>
+<div id="WholePage">
+<button onclick="Edit()" id="Edit" style="visibility:visible;">Edit</button>
+<button onclick="Print()" id="Print" style="visibility:visible;">Print</button>
+<div class="MainDetails">
+<div id="Image">
+<img id="UserImage" src="headshot.jpg" alt="Picture" />
+</div>
+<div id="Name">
+<h2 id="UserName"></h2>
+<h3 id="Post"></h3>
+</div>
+<div id="ContactDetails">
+<ul>
+    <li id="Email"></li>
+    <li id="Mobile"></li>
+    <li id="Address"></li>
+</ul>
+</div>
+<div class="clear"></div>
+</div>
+<div id="MainArea">
+    <section>
+    <article>
+        <div class="SectionTitle">
+        <h1>Objective</h1></div>
+        <div class="SectionContent"><p>Seeking a Position with a Reputed Organization that helps to utilize my Technical, Analytical skills & also provide the opportunity to gain additional skills and experience</p><br></div></article>
+    <div class="clear"></div></section>
+    <section>
+    <article>
+        <div class="SectionTitle">
+        <h1>Education</h1></div>
+        <div class="SectionContent">
+        <table width=100%><tr><th>Qualification/Degree</th><th>School/College</th><th>University or Board</th><th>Year</th></tr>
+            <tr><td>B.E(CSE)</td>
+            <td id="SCName"></td><td id="UName"></td>
+            <td id="Year"></td></tr><tr><td>Class XII</td><td id="SName"></td><td id="BName"></td><td id="Year2"></td></tr><tr><td>Class X</td><td id="SName2"></td><td id="BName2"></td><td id="Year3"></td></tr></table></div></article>
+    <div class="clear"></div></section>
+    <section>
+    <article>
+        <div class="SectionTitle">
+        <h1>Academic Projects</h1></div>
+        <div class="SectionContent">
+        <p id="AProject"></p></div></article><div class="clear"></div></section>
+</div>
+</div>
+</body>
+</html>

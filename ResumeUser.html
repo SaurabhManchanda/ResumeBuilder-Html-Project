@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head><title>Resume Form</title>
+<style>
+#Wholepage
+{
+    background-color: #f3f3f3;
+}
+input[type=text]{
+    width: 100%;
+    padding: 10px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.container {
+    padding: 16px;
+}
+button {
+   background-color: #cf8a05;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+</style>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+    $( document ).ready(function() {
+    });
+
+    $( window ).load(function() {
+        var CurrentName=sessionStorage.getItem('key');  
+        $('#Fname').val(CurrentName);
+    });
+        function GenerateCV()
+        {
+            var User=[];
+            var Object = {}
+            var FullName=$('#Fname').val();
+            var Post=$('#Post').val();
+            var Email=$('#Email').val();
+            var Mobile=$('#Mnumber').val();
+            var Address=$('#Address').val();
+            Object.FullName=FullName;
+            Object.Post=Post;
+            Object.Email=Email;
+            Object.Mobile=Mobile;
+            Object.Address=Address;
+            User.push(Object);
+            console.log(Object);   
+        }
+    </script>
+    </head>
+<body>
+<div id="Wholepage">
+<Center><b><h1>RESUME/CV GENRATOR</h1></b></Center>
+<h3>Form</h3>
+<form>
+  <div class="container">
+    <label><b>Full Name :</b></label>
+    <input type="text" value="Enter Full Name"id="Fname"  required>
+    <label><b>Post :</b></label>
+    <input type="text" value="Enter Post" id="Post" required>
+    <label><b>Email :</b></label>
+    <input type="text" value="Enter Email" id="Email" required>
+    <label><b>Mobile Number :</b></label>
+    <input type="text" value="Enter Mobile Number" id="Mnumber" required>
+    <label><b>Address :</b></label>
+    <input type="text" value="Enter Address" id="Address" required>
+    
+  </div>
+</form>
+    <button onclick="GenerateCV()" id="GenerateCV">Generate</button>
+    </div>
+</body>
+</html>

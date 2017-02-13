@@ -1,0 +1,107 @@
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video {
+border:0;
+font:inherit;
+font-size:100%;
+margin:0;
+padding:0;
+vertical-align:baseline;
+}
+.clear {clear: both;}
+html, body {
+    font-family: 'Lato', helvetica, arial, sans-serif; font-size: 16px; color: #222;}
+#WholePage {
+	width: 100%;
+	max-width: 800px;
+	background: #f3f3f3;
+	margin: 30px auto;
+}
+.MainDetails {
+	padding: 25px 35px;
+	border-bottom: 2px solid #cf8a05;
+	background: #ededed;
+}
+#Image{
+	width: 12.5%;
+	float: left;
+	margin-right: 30px;
+}
+#Image img {
+	width: 100%;
+	height: auto;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+#Name {
+	float: left;
+}
+#ContactDetails {
+	float: right;
+}
+#ContactDetails ul {
+	list-style-type: none;
+	font-size: 0.9em;
+	margin-top: 2px;
+}
+
+#ContactDetails ul li {
+	margin-bottom: 3px;
+	color: #444;
+}
+#ContactDetails ul li a:hover { 
+	color: #cf8a05;
+}
+#Name h2 {
+	font-size: 1.5em;
+	font-weight: 700;
+	font-family: 'Rokkitt', Helvetica, Arial, sans-serif;
+	margin-bottom: -6px;
+}
+
+#Name h3 {
+	font-size: 1.5em;
+    font-weight: 700;
+	margin-left: 2px;
+	font-family: 'Rokkitt', Helvetica, Arial, sans-serif;
+}
+#MainArea {
+	padding: 0 40px;
+}
+section {
+	border-top: 1px solid #dedede;
+	padding: 20px 0 0;
+}
+section:first-child {
+	border-top: 0;
+}
+
+section:last-child {
+	padding: 20px 0 10px;
+}
+.SectionTitle {
+	float: left;
+	width: 25%;
+}
+
+.SectionContent {
+	float: right;
+	width: 72.5%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+}
+#Edit,#Print
+{
+    float: right;
+    background-color: #cf8a05;
+    color: white;   
+}
+#Back
+{
+     float: left;
+    background-color: #cf8a05;
+    color: white;  
+}
